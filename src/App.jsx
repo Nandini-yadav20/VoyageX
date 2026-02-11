@@ -9,7 +9,7 @@ import TestimonialSection from "./components/Testimonial";
 import TourPackagesPage from "./pages/TourPackages";
 import BookingPage from "./pages/BookingPage";
 import AboutUsPage from "./pages/AboutusPage";
-import ContactPage from "./pages/ContactPAge";
+import ContactPage from "./pages/ContactPAge"; 
 
 
 function App() {
