@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -8,7 +9,7 @@ const Footer = () => {
   const footerRef = useRef(null);
   const sectionsRef = useRef([]);
   const socialRef = useRef([]);
-
+ const navigate = useNavigate()
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Animate footer sections
@@ -219,7 +220,8 @@ const Footer = () => {
               </p>
             </div>
 
-            <button className="mt-6 px-7 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 hover:scale-105 transition-all duration-300 font-semibold shadow-lg shadow-indigo-500/40 hover:shadow-indigo-500/60">
+            <button onClick={ () => navigate ("/booking")}
+            className="mt-6 px-7 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 hover:scale-105 transition-all duration-300 font-semibold shadow-lg shadow-indigo-500/40 hover:shadow-indigo-500/60">
               Book Your Trip
             </button>
           </div>

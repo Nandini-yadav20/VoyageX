@@ -1,7 +1,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
-
+import { MdOutlineNavigateNext } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -54,6 +55,8 @@ const offers = [
 
 export default function Offers() {
   const sectionRef = useRef(null);
+  
+const navigate = useNavigate()
   const { scrollYProgress } = useScroll({ target: sectionRef });
   
 
@@ -191,9 +194,10 @@ export default function Offers() {
                         <span className="text-sm text-white/60"> / night</span>
                       </span>
 
-                      <button
+                      <button  onClick={() => navigate("/booking", { state: { step: 2 } })}
                         onMouseMove={(e) => magnet(e, e.currentTarget)}
                         onMouseLeave={(e) => resetMagnet(e.currentTarget)}
+                       
                         className="px-7 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 shadow-xl shadow-indigo-500/40 font-semibold"
                       >
                         Book Now
@@ -209,16 +213,20 @@ export default function Offers() {
         </div>
          {/* Floating Explore More Button */}
 <button
-  onClick={() => navigate("/tours")}
+  type="button"
+  onClick={() => navigate("/tours-packages")}
   className="absolute bottom-6 right-6 z-50 px-6 py-3 rounded-full 
   bg-gradient-to-r from-indigo-500 to-purple-600 
   text-white font-semibold tracking-wide
   shadow-[0_0_25px_rgba(99,102,241,0.6)]
   hover:scale-110 transition-transform duration-300
-  backdrop-blur-xl border border-white/10"
+  backdrop-blur-xl border border-white/10
+  flex items-center gap-2"
 >
-  Explore More ✨
+  Explore More <MdOutlineNavigateNext className="text-xl" />
 </button>
+
+  
 
       </div>
      

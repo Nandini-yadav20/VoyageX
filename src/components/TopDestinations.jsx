@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
 
 const destinations = [
   {
@@ -72,6 +73,7 @@ export default function TopDestinations() {
   const trackRef = useRef(null);
   const cardsRef = useRef([]);
   const [active, setActive] = useState(2);
+  const navigate= useNavigate ()
 
   const slideTo = (index) => {
     const container = containerRef.current;
@@ -163,7 +165,9 @@ export default function TopDestinations() {
                     {d.price}
                   </p>
 
-                  <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white text-sm px-5 py-2 rounded-full transition">
+                  <button  onClick={() => navigate("/booking", { state: { step: 2 } })
+}
+                  className="mt-4 bg-orange-500 hover:bg-orange-600 text-white text-sm px-5 py-2 rounded-full transition">
                     Book Now
                   </button>
                 </div>

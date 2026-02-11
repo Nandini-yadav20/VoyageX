@@ -2,13 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const BookingPage = () => {
   const heroRef = useRef(null);
   const formRef = useRef(null);
-  const [currentStep, setCurrentStep] = useState(1);
+  const location = useLocation ()
+  const [currentStep, setCurrentStep] = useState(location.state?.step || 1);
+
   const [showConfirmation, setShowConfirmation] = useState(false);
   
   const [bookingData, setBookingData] = useState({
@@ -27,12 +30,12 @@ const BookingPage = () => {
   ];
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.to(heroRef.current, { yPercent: 30, ease: "none", scrollTrigger: { trigger: heroRef.current, start: "top top", scrub: true }});
-      gsap.from(formRef.current, { opacity: 0, y: 50, duration: 1, ease: "power3.out", delay: 0.3 });
-    });
-    return () => ctx.revert();
-  }, []);
+  if (currentStep > 1) {
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 300);
+  }
+}, [currentStep]);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
