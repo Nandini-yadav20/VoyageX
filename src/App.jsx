@@ -10,13 +10,17 @@ import TourPackagesPage from "./pages/TourPackages";
 import BookingPage from "./pages/BookingPage";
 import AboutUsPage from "./pages/AboutusPage";
 import Contact from "./pages/Contact";
+import ScrollToTop from "./components/Scrolltotop";
+
 
 function App() {
   return (
     <>
+      {/* ✅ Scroll reset on route change */}
+ <ScrollToTop/>
+
       {/* ROUTES ONLY */}
       <Routes>
-
         <Route
           path="/"
           element={
@@ -35,7 +39,6 @@ function App() {
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/contact" element={<Contact />} />
-
       </Routes>
 
       {/* Footer OUTSIDE Routes */}
