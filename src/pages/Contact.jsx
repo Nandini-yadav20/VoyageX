@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,6 +10,7 @@ const Contact = () => {
   const heroRef = useRef(null);
   const formRef = useRef(null);
   const contactInfoRef = useRef([]);
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -178,8 +180,36 @@ const Contact = () => {
     }
   ];
 
-  return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+ return (
+  <div className="min-h-screen bg-black text-white overflow-hidden">
+
+    {/* BACK BUTTON */}
+    <motion.button
+      onClick={() => navigate("/")}
+      initial={{ opacity: 0, x: -40 }}
+      animate={{ opacity: 1, x: 0 }}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.92 }}
+      className="fixed top-6 left-6 z-[9999] 
+                 w-12 h-12 rounded-full 
+                 bg-white/10 backdrop-blur-xl 
+                 border border-white/20 
+                 shadow-lg hover:shadow-purple-500/40 
+                 flex items-center justify-center 
+                 transition-all duration-300"
+      aria-label="Go back to home"
+    >
+      <svg
+        className="w-6 h-6 text-white"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </motion.button>
+
       
       {/* Hero Section with Parallax */}
       <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">

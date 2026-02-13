@@ -8,11 +8,13 @@ import { FaHandshake } from "react-icons/fa";
 import { FaLightbulb } from "react-icons/fa6";
 import { SiTrustpilot } from "react-icons/si";
 import { GiTrophy } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutUsPage = () => {
   const statsRef = useRef([]);
+  const navigate = useNavigate ()
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -118,8 +120,36 @@ const AboutUsPage = () => {
     { number: 98, label: "Satisfaction Rate", suffix: "%" },
   ];
 
-  return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+ return (
+  <div className="min-h-screen bg-black text-white overflow-hidden">
+
+    {/* BACK BUTTON */}
+    <motion.button
+      onClick={() => navigate("/")}
+      initial={{ opacity: 0, x: -40 }}
+      animate={{ opacity: 1, x: 0 }}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.92 }}
+      className="fixed top-6 left-6 z-[9999] 
+                 w-12 h-12 rounded-full 
+                 bg-white/10 backdrop-blur-xl 
+                 border border-white/20 
+                 shadow-lg hover:shadow-purple-500/40 
+                 flex items-center justify-center 
+                 transition-all duration-300"
+      aria-label="Go back to home"
+    >
+      <svg
+        className="w-6 h-6 text-white"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </motion.button>
+
       
       {/* HERO */}
       <section className="relative h-[70vh] flex items-center justify-center">
@@ -278,7 +308,7 @@ const AboutUsPage = () => {
                   Join thousands of satisfied travelers and discover your next adventure with VoyageX
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <motion.button
+                  <motion.button onClick={() => navigate ('/tours-packages')}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-10 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full font-bold text-lg shadow-2xl shadow-cyan-500/50 hover:shadow-cyan-500/70 transition-all"
@@ -286,6 +316,7 @@ const AboutUsPage = () => {
                     Explore Destinations
                   </motion.button>
                   <motion.button
+                  onClick={() => navigate ('/contact')}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-10 py-4 bg-white/10 backdrop-blur-xl border-2 border-white/20 rounded-full font-bold text-lg hover:bg-white/20 hover:border-cyan-400/50 transition-all"

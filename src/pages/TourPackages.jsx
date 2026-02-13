@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,6 +10,7 @@ const TourPackagesPage = () => {
   const heroRef = useRef(null);
   const headerRef = useRef(null);
   const filtersRef = useRef(null);
+  const navigate = useNavigate();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -198,7 +200,35 @@ const TourPackagesPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+  <div className="min-h-screen bg-black text-white overflow-hidden">
+
+    {/* BACK BUTTON */}
+    <motion.button
+      onClick={() => navigate("/")}
+      initial={{ opacity: 0, x: -40 }}
+      animate={{ opacity: 1, x: 0 }}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.92 }}
+      className="fixed top-6 left-6 z-[9999] 
+                 w-12 h-12 rounded-full 
+                 bg-white/10 backdrop-blur-xl 
+                 border border-white/20 
+                 shadow-lg hover:shadow-purple-500/40 
+                 flex items-center justify-center 
+                 transition-all duration-300"
+      aria-label="Go back to home"
+    >
+      <svg
+        className="w-6 h-6 text-white"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </motion.button>
+
       
       {/* HERO */}
       <section ref={heroRef} className="relative h-[60vh] flex items-center justify-center">

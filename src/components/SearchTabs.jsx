@@ -14,23 +14,45 @@ export default function SearchTabs() {
   const [activeTab, setActiveTab] = useState("hotels");
   const indicatorRef = useRef(null);
   const tabRefs = useRef([]);
+  const containerRef = useRef(null);
 
-  useEffect(() => {
+  /* ---------- POSITION INDICATOR (MOBILE SAFE) ---------- */
+  const moveIndicator = () => {
     const index = tabs.findIndex((t) => t.id === activeTab);
     const el = tabRefs.current[index];
-    if (!el) return;
+    const container = containerRef.current;
+
+    if (!el || !container) return;
+
+    const elRect = el.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
 
     gsap.to(indicatorRef.current, {
-      x: el.offsetLeft,
-      width: el.offsetWidth,
+      x: elRect.left - containerRect.left,
+      width: elRect.width,
       duration: 0.6,
       ease: "power4.out",
     });
+  };
+
+  useEffect(moveIndicator, [activeTab]);
+
+  /* Recalculate on resize/orientation */
+  useEffect(() => {
+    window.addEventListener("resize", moveIndicator);
+    return () => window.removeEventListener("resize", moveIndicator);
   }, [activeTab]);
 
+  /* ---------- MAGNETIC EFFECT (DISABLED ON TOUCH) ---------- */
+  const isTouch = () =>
+    "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
   const magnet = (e) => {
+    if (isTouch()) return;
+
     const el = e.currentTarget;
     const rect = el.getBoundingClientRect();
+
     gsap.to(el, {
       x: (e.clientX - rect.left - rect.width / 2) * 0.28,
       y: (e.clientY - rect.top - rect.height / 2) * 0.28,
@@ -40,6 +62,8 @@ export default function SearchTabs() {
   };
 
   const resetMagnet = (e) => {
+    if (isTouch()) return;
+
     gsap.to(e.currentTarget, {
       x: 0,
       y: 0,
@@ -50,7 +74,7 @@ export default function SearchTabs() {
 
   return (
     <section className="relative py-12">
-      {/* CINEMATIC MOVING GRADIENT BG */}
+      {/* BACKGROUND */}
       <div className="absolute inset-0 -z-10 animate-gradient bg-[length:400%_400%] bg-gradient-to-br from-[#020617] via-[#050d1f] to-[#090020]" />
 
       {/* GLOW ORBS */}
@@ -58,9 +82,11 @@ export default function SearchTabs() {
       <div className="absolute bottom-[-100px] right-[-80px] w-[360px] h-[360px] bg-purple-600/20 blur-[140px] rounded-full animate-floatSlow delay-1000" />
 
       <div className="relative max-w-7xl mx-auto px-4">
-        <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-[0_0_60px_rgba(99,102,241,0.18)] overflow-hidden">
-
-          {/* NEON SLIDING INDICATOR */}
+        <div
+          ref={containerRef}
+          className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-[0_0_60px_rgba(99,102,241,0.18)] overflow-hidden"
+        >
+          {/* INDICATOR */}
           <span
             ref={indicatorRef}
             className="absolute top-1 bottom-1 left-0 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl shadow-[0_0_45px_rgba(99,102,241,0.85)]"
