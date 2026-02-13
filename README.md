@@ -2,6 +2,8 @@
 A visually rich, animation-driven travel booking web application that allows users to explore destinations, discover travel packages, and plan trips through an immersive user experience.
 Built with React and advanced animation libraries to deliver a premium, interactive tourism platform.
 
+For live Preview :https://voyage-x-chi.vercel.app/
+
 🌍 Overview
 VoyageX is a next-generation travel website designed to replicate real-world tour booking platforms.
 It focuses on performance, responsiveness, and smooth animations to create an engaging browsing experience across devices.
