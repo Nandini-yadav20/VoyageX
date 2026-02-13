@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
  * Automatically scrolls to top when route changes
  * Place this component in your App.jsx or main router file
  */
-export default function ScrollToTop() {
+export default function ScrollUp() {
   const { pathname } = useLocation();
 
   useEffect(() => {
