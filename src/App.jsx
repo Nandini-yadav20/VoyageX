@@ -9,22 +9,19 @@ import TestimonialSection from "./components/Testimonial";
 import TourPackagesPage from "./pages/TourPackages";
 import BookingPage from "./pages/BookingPage";
 import AboutUsPage from "./pages/AboutusPage";
-import ContactPage from "./pages/ContactPAge"; 
-
+import Contact from "./pages/Contact";
 
 function App() {
   return (
     <>
-     
-
+      {/* ROUTES ONLY */}
       <Routes>
 
-        {/* HOME PAGE */}
         <Route
           path="/"
           element={
             <>
-               <Hero/>
+              <Hero />
               <SearchTabs />
               <TopDestinations />
               <Offers />
@@ -33,24 +30,15 @@ function App() {
           }
         />
 
-        {/* TOP DESTINATIONS */}
         <Route path="/top-destinations" element={<TopDestinations />} />
-
-        {/* TOURS PAGE */}
         <Route path="/tours-packages" element={<TourPackagesPage />} />
-
-        {/* BOOKING */}
         <Route path="/booking" element={<BookingPage />} />
-
-        {/* ABOUT */}
         <Route path="/about" element={<AboutUsPage />} />
-          <Route path="/contact" element={<ContactPage/>} />
-        
-       
-
+        <Route path="/contact" element={<Contact />} />
 
       </Routes>
 
+      {/* Footer OUTSIDE Routes */}
       <Footer />
     </>
   );

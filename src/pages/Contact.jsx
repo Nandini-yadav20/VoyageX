@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ContactPage = () => {
+const Contact = () => {
   const heroRef = useRef(null);
   const formRef = useRef(null);
   const contactInfoRef = useRef([]);
@@ -490,4 +490,4 @@ const ContactPage = () => {
   );
 };
 
-export default ContactPage;
+export default Contact;
